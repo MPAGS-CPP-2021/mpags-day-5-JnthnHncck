@@ -3,6 +3,8 @@
 
 #include "CipherMode.hpp"
 #include "CaesarCipher.hpp"
+#include "Cipher.hpp"
+
 #include <string>
 #include <map>
 #include <algorithm>
@@ -18,8 +20,7 @@
  * \brief Encrypt or decrypt text using the Vigenere cipher with the given key
  */
 
-class VigenereCipher
-{
+class VigenereCipher : public Cipher {
 private:
     std::string key_{""};                       //Cipher Key
     std::map<char,CaesarCipher> charLookup_;    //Lookup table
@@ -46,10 +47,7 @@ public:
      * \param cipherMode this tells us whether to encrypt or decrypt
      */
     std::string applyCipher(const std::string& inputText, \
-    const CipherMode /*cipherMode*/ ) const;
+    const CipherMode /*cipherMode*/ ) const override;
 };
-
-
-
 
 #endif

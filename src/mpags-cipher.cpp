@@ -5,6 +5,7 @@
 #include "ProcessCommandLine.hpp"
 #include "TransformChar.hpp"
 #include "VigenereCipher.hpp"
+#include "CipherFactory.hpp"
 
 #include <cctype>
 #include <fstream>
@@ -93,24 +94,8 @@ int main(int argc, char* argv[])
 
     std::string outputText;
 
-    switch (settings.cipherType) {
-        case CipherType::Caesar: {
-            // Run the Caesar cipher (using the specified key and encrypt/decrypt flag) on the input text
-            CaesarCipher cipher{settings.cipherKey};
-            outputText = cipher.applyCipher(inputText, settings.cipherMode);
-            break;
-        }
-        case CipherType::Playfair: {
-            PlayfairCipher cipher{settings.cipherKey};
-            outputText = cipher.applyCipher(inputText, settings.cipherMode);
-            break;
-        }
-        case CipherType::Vigenere: {
-            VigenereCipher cipher{settings.cipherKey};
-            outputText = cipher.applyCipher(inputText, settings.cipherMode);
-            break;
-        }
-    }
+    auto cipher = cipherFactory(settings.cipherType, settings.cipherKey);
+    outputText = cipher->applyCipher(inputText, settings.cipherMode);
 
     // Output the encrypted/decrypted text to stdout/file
     if (!settings.outputFile.empty()) {
@@ -121,6 +106,7 @@ int main(int argc, char* argv[])
                       << settings.outputFile << "'" << std::endl;
             return 1;
         }
+        
 
         // Print the encrypted/decrypted text to the file
         outputStream << outputText << std::endl;

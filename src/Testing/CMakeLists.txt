@@ -37,3 +37,8 @@ add_test(NAME test-playfaircipher COMMAND testPlayfairCipher)
 add_executable(testVignereCipher testVignereCipher.cpp)
 target_link_libraries(testVignereCipher PRIVATE Catch MPAGSCipher)
 add_test(NAME test-vignerecipher COMMAND testVignereCipher)
+
+# Test Ciphers
+add_executable(testCiphers testCiphers.cpp)
+target_link_libraries(testCiphers PRIVATE Catch MPAGSCipher)
+add_test(NAME test-ciphers COMMAND testCiphers)
