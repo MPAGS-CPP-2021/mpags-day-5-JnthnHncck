@@ -13,7 +13,12 @@ add_library(MPAGSCipher STATIC
   ProcessCommandLine.cpp
   TransformChar.hpp
   TransformChar.cpp
-  )
+  VigenereCipher.hpp
+  VigenereCipher.cpp
+  Cipher.hpp
+  CipherFactory.hpp
+  CipherFactory.cpp
+    )
 
 target_include_directories(MPAGSCipher
   PUBLIC ${CMAKE_CURRENT_LIST_DIR}
